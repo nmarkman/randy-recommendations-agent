@@ -98,9 +98,16 @@ GMAIL_APP_PASSWORD=your-gmail-app-password-here
 RECIPIENT_EMAIL=your-email@gmail.com
 
 # Randy's Configuration
+# Your city/region for local recommendations
 REGION=Charleston, SC
+
+# When Randy should stop sending recommendations (24-hour format)
 QUIET_HOURS_START=23
+
+# When Randy can start sending recommendations again (24-hour format)
 QUIET_HOURS_END=7
+
+# How often Randy should make recommendations (in days)
 RECOMMENDATION_CADENCE_DAYS=7
 ```
 
