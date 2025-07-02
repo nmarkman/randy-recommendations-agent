@@ -272,61 +272,91 @@ result = Runner.run_sync(randy, "Time for a weekly recommendation!")
 
 ---
 
-## 🏃 Phase 3: Run (Advanced Randy)
+## 🏃 Phase 3: Run (Multi-User Randy Platform)
 
-**Goal**: Full-featured autonomous agent with learning capabilities
+**Goal**: Transform Randy from a personal agent into a scalable SaaS platform where multiple users can sign up, configure preferences, and receive personalized recommendations
 
-### Advanced AI Capabilities
-- [ ] **Multi-Modal Reasoning**
-  - [ ] Consider multiple factors simultaneously (weather, time, mood indicators)
+### Multi-User Platform Foundation
+- [ ] **User Management System**
+  - [ ] Simple email/password authentication
+  - [ ] User registration and onboarding flow
+  - [ ] Setup wizard for initial preference configuration
+  - [ ] User profile management dashboard
+
+- [ ] **Database Architecture**
+  - [ ] PostgreSQL/Supabase backend for user data
+  - [ ] User preferences storage (frequency, region, quiet hours, domains)
+  - [ ] Per-user recommendation history and memory
+  - [ ] Multi-tenant data isolation and security
+
+### Web Application & Configuration
+- [ ] **Simple Configuration Web App**
+  - [ ] Newsletter-style signup form with Randy branding
+  - [ ] Preference configuration interface:
+    - [ ] Recommendation frequency and cadence settings
+    - [ ] User's region/location selection
+    - [ ] Quiet hours customization
+    - [ ] Preferred domains (restaurants, POI, movies)
+  - [ ] Recipients management (multiple email addresses)
+  - [ ] Relationship context selection (couple, family, friends, individual)
+
+- [ ] **User Experience**
+  - [ ] Clean, simple interface focused on email-first experience
+  - [ ] Responsive design for mobile/desktop configuration
+  - [ ] Email verification and confirmation workflows
+  - [ ] Simple social share links in Randy's emails
+
+### Multi-User Randy Engine
+- [ ] **Personalized Agent Instructions**
+  - [ ] Dynamic Randy personality based on relationship context
+  - [ ] User-specific memory and preference integration
+  - [ ] Contextual recommendations per user configuration
+  - [ ] Support for multiple recipients per user account
+
+- [ ] **Scalable Scheduling System**
+  - [ ] Individual user schedules and timing
+  - [ ] Efficient batch processing for multiple users
+  - [ ] Queue-based recommendation generation
+  - [ ] Per-user quiet hours and frequency respect
+
+### Platform Infrastructure
+- [ ] **Email Notification System**
+  - [ ] Scalable email delivery service (SendGrid/similar)
+  - [ ] Email template system with user personalization
+  - [ ] Delivery tracking and error handling
+  - [ ] Unsubscribe and preference management via email
+
+- [ ] **API Rate Management**
+  - [ ] User-based API quota management
+  - [ ] Efficient API usage across multiple users
+  - [ ] Caching strategies for common requests
+  - [ ] Upgrade path to paid API tiers
+
+### Advanced Multi-User Features
+- [ ] **Enhanced Intelligence (Retained from Original Phase 3)**
+  - [ ] Multi-modal reasoning with weather, time, and context
   - [ ] Chain-of-thought reasoning in agent instructions
-  - [ ] Advanced OpenAI model integration (GPT-4, future models)
+  - [ ] Advanced OpenAI model integration for better personalization
+  - [ ] Seasonal awareness and pattern recognition
 
-- [ ] **Dynamic Learning**
-  - [ ] User feedback integration
-  - [ ] Preference learning from interaction patterns
-  - [ ] Adaptive recommendation frequency
+- [ ] **Platform Analytics**
+  - [ ] User engagement tracking across the platform
+  - [ ] Recommendation performance metrics per user segment
+  - [ ] System health monitoring and scaling alerts
+  - [ ] Usage analytics for platform optimization
 
-### Extended Features
-- [ ] **Multi-Channel Communication**
-  - [ ] SMS integration (Twilio)
-  - [ ] Rich email formatting with images
-  - [ ] Optional Slack/Discord integration
+- [ ] **Social & Sharing Features**
+  - [ ] Simple share buttons in recommendation emails
+  - [ ] Optional recommendation sharing between users
+  - [ ] Public recommendation showcase (with user permission)
+  - [ ] Referral system for new user acquisition
 
-- [ ] **Advanced Recommendation Types**
-  - [ ] Books and audiobooks
-  - [ ] Local events and happenings
-  - [ ] Short road trips and weekend getaways
-  - [ ] Seasonal activity suggestions
-
-- [ ] **Social Features**
-  - [ ] Integration with calendar for timing
-  - [ ] Group activity suggestions
-  - [ ] Sharing recommendations with friends
-
-### Intelligence & Autonomy
-- [ ] **Autonomous Decision Making**
-  - [ ] Self-adjusting recommendation frequency based on engagement
-  - [ ] Proactive suggestion timing optimization
-  - [ ] A/B testing of message styles
-
-- [ ] **Advanced Memory**
-  - [ ] Vector database for semantic similarity
-  - [ ] Long-term preference modeling
-  - [ ] Seasonal pattern recognition
-
-### Analytics & Optimization
-- [ ] **Performance Analytics**
-  - [ ] Recommendation engagement tracking
-  - [ ] User satisfaction metrics
-  - [ ] System performance monitoring
-
-- [ ] **Continuous Improvement**
-  - [ ] Automated prompt optimization
-  - [ ] Model fine-tuning based on feedback
-  - [ ] Feature usage analytics
-
-**Phase 3 Success Criteria**: Randy operates as a truly autonomous agent that learns and adapts, providing highly personalized recommendations across multiple channels.
+**Phase 3 Success Criteria**: 
+- [ ] Multiple users can sign up and configure Randy independently
+- [ ] Each user receives personalized recommendations based on their preferences
+- [ ] Platform scales efficiently with growing user base
+- [ ] 95%+ uptime for the web application and email delivery
+- [ ] User engagement rate >60% across the platform
 
 ---
 
