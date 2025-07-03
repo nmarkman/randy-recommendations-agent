@@ -172,6 +172,38 @@ crontab -e
 4. Set action to run: `python main.py`
 5. Set start directory to your Randy folder
 
+### 🚀 GitHub Actions (Cloud - Recommended!)
+
+For a completely **free**, **always-on** deployment that requires no local infrastructure:
+
+1. **Add Repository Secrets**: Go to your GitHub repo → Settings → Secrets → Actions
+   - Add all your API keys and configuration as secrets
+   - Required: `OPENAI_API_KEY`, `GOOGLE_PLACES_API_KEY`, `TMDB_API_KEY`, `GMAIL_USERNAME`, `GMAIL_APP_PASSWORD`, `RECIPIENT_EMAIL`
+   - Optional: `REGION`, `QUIET_HOURS_START`, `QUIET_HOURS_END`, `RECOMMENDATION_CADENCE_DAYS`
+
+2. **Push Randy to GitHub**: Commit and push your Randy project (the workflow file is included)
+
+3. **That's it!** 🎉 Randy will automatically run daily at 11 AM EST
+
+**GitHub Actions Features:**
+- ✅ **100% Free**: No cost, ever
+- ✅ **Always-On**: Works even when your computer is off
+- ✅ **Manual Trigger**: Run Randy anytime from GitHub Actions tab
+- ✅ **Health Monitoring**: Built-in health checks before each run
+- ✅ **Comprehensive Logging**: Full logs saved for 30 days
+- ✅ **Zero Maintenance**: No servers to manage
+
+**Manual Trigger**: 
+1. Go to your GitHub repo → Actions tab
+2. Click "🌀 Randy Recommendation Agent" 
+3. Click "Run workflow"
+4. Choose "Force run" if you want to send even if not due
+
+**Monitor Randy**:
+- Check the Actions tab for run history
+- View detailed logs for each execution
+- Download log artifacts for debugging
+
 ## 🏗️ Architecture
 
 Randy is built using the **OpenAI Agents SDK** and follows a clean, modular architecture:
