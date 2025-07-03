@@ -136,6 +136,14 @@ async def main():
         print_status()
         return
     
+    # Check if this is a health check
+    if len(sys.argv) > 1 and sys.argv[1] in ['health', '--health', '-h']:
+        from src.utils.health_checks import run_all_health_checks, print_health_report
+        print("\n🏥 Running comprehensive health checks...")
+        results = run_all_health_checks()
+        print_health_report(results)
+        return
+    
     # Check if this is a force run
     force_run = len(sys.argv) > 1 and sys.argv[1] in ['force', '--force', '-f']
     
@@ -156,7 +164,10 @@ async def main():
         should_send, reason = scheduler.should_send_recommendation()
         if not should_send:
             print(f"⏰ {reason}")
-            print("\nUse 'python main.py force' to send anyway, or 'python main.py status' to check status.")
+            print("\nAvailable commands:")
+            print("  python main.py force   - Send recommendation anyway")
+            print("  python main.py status  - Check system status") 
+            print("  python main.py health  - Run health checks")
             return
     
     print("🎯 Ready to send recommendation!")
