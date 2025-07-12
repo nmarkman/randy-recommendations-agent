@@ -36,6 +36,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         
+    - name: 📥 Download previous recommendation history
+      uses: actions/download-artifact@v4
+      continue-on-error: true  # Continue even if this is the first run with no history
+      with:
+        name: randy-data
+        path: data/
+        
     - name: 🔧 Set up environment
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -49,10 +56,13 @@ jobs:
         QUIET_HOURS_END: ${{ secrets.QUIET_HOURS_END }}
         RECOMMENDATION_CADENCE_DAYS: ${{ secrets.RECOMMENDATION_CADENCE_DAYS }}
       run: |
-        # Create data directory
+        # Create data directory if it doesn't exist
         mkdir -p data
         mkdir -p logs
-        
+        # Create empty recommendation history file if it doesn't exist
+        if [ ! -f "data/recommendation_history.json" ]; then
+          echo "[]" > data/recommendation_history.json
+        fi
         # Verify environment setup
         echo "🔍 Environment Check:"
         echo "Region: ${REGION:-Charleston, SC}"
@@ -126,6 +136,14 @@ jobs:
           data/randy.log
           logs/
         retention-days: 30
+        
+    - name: 📤 Save recommendation history
+      uses: actions/upload-artifact@v4
+      if: always()  # Always upload data, even if Randy fails
+      with:
+        name: randy-data
+        path: data/*.json
+        retention-days: 90  # Keep history for 90 days
         
     - name: 📈 Summary
       if: always()
