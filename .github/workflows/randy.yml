@@ -36,12 +36,18 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         
-    - name: 📥 Download previous recommendation history
-      uses: actions/download-artifact@v4
-      continue-on-error: true  # Continue even if this is the first run with no history
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
       with:
-        name: randy-data
-        path: data/
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Download Randy state from S3
+      run: |
+        mkdir -p data
+        aws s3 cp s3://${{ secrets.S3_BUCKET }}/recommendation_history.json data/recommendation_history.json || echo "[]" > data/recommendation_history.json
+        aws s3 cp s3://${{ secrets.S3_BUCKET }}/schedule.json data/schedule.json || echo "{}" > data/schedule.json
         
     - name: 🔧 Set up environment
       env:
@@ -62,6 +68,10 @@ jobs:
         # Create empty recommendation history file if it doesn't exist
         if [ ! -f "data/recommendation_history.json" ]; then
           echo "[]" > data/recommendation_history.json
+        fi
+        # Create empty schedule file if it doesn't exist
+        if [ ! -f "data/schedule.json" ]; then
+          echo "{}" > data/schedule.json
         fi
         # Verify environment setup
         echo "🔍 Environment Check:"
@@ -127,6 +137,11 @@ jobs:
           python main.py
         fi
         
+    - name: Upload Randy state to S3
+      run: |
+        aws s3 cp data/recommendation_history.json s3://${{ secrets.S3_BUCKET }}/recommendation_history.json
+        aws s3 cp data/schedule.json s3://${{ secrets.S3_BUCKET }}/schedule.json
+        
     - name: 📋 Upload Logs
       uses: actions/upload-artifact@v4
       if: always()  # Always upload logs, even if Randy fails
@@ -136,14 +151,6 @@ jobs:
           data/randy.log
           logs/
         retention-days: 30
-        
-    - name: 📤 Save recommendation history
-      uses: actions/upload-artifact@v4
-      if: always()  # Always upload data, even if Randy fails
-      with:
-        name: randy-data
-        path: data/*.json
-        retention-days: 90  # Keep history for 90 days
         
     - name: 📈 Summary
       if: always()
